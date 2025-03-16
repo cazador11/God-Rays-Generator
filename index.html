@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="God Rays Generator - Create beautiful light ray effects for your images">
+    <meta name="keywords" content="god rays, light rays, image editor, photo effects, light effects">
+    <title>God Rays Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>God Rays Generator</h1>
+            <p>Create stunning light ray effects for your images</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Drag & drop your image here</p>
+                    <p>or</p>
+                    <label for="fileInput" class="upload-btn">Select Image</label>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                </div>
+            </section>
+
+            <section class="editor-section hidden" id="editorSection">
+                <div class="canvas-container">
+                    <div class="canvas-wrapper">
+                        <canvas id="previewCanvas"></canvas>
+                        <div class="toggle-container">
+                            <label class="toggle">
+                                <input type="checkbox" id="beforeAfterToggle">
+                                <span class="slider"></span>
+                                <span class="toggle-label">Before / After</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls-panel">
+                    <div class="panel-header">
+                        <h2>Light Ray Controls</h2>
+                        <button id="resetBtn" class="reset-btn">Reset All</button>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="positionX">Position X</label>
+                        <div class="slider-container">
+                            <input type="range" id="positionX" min="0" max="100" value="50">
+                            <span class="value-display">50%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="positionY">Position Y</label>
+                        <div class="slider-container">
+                            <input type="range" id="positionY" min="0" max="100" value="50">
+                            <span class="value-display">50%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="intensity">Intensity</label>
+                        <div class="slider-container">
+                            <input type="range" id="intensity" min="0" max="100" value="50">
+                            <span class="value-display">50%</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="rayCount">Ray Count</label>
+                        <div class="slider-container">
+                            <input type="range" id="rayCount" min="5" max="50" value="20">
+                            <span class="value-display">20</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="spreadAngle">Spread Angle</label>
+                        <div class="slider-container">
+                            <input type="range" id="spreadAngle" min="15" max="180" value="90">
+                            <span class="value-display">90°</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="rayColor">Ray Color</label>
+                        <div class="color-picker-container">
+                            <input type="color" id="rayColor" value="#ffffff">
+                            <span class="color-value">#ffffff</span>
+                        </div>
+                    </div>
+
+                    <div class="presets-container">
+                        <h3>Presets</h3>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-preset="divine-glow">Divine Glow</button>
+                            <button class="preset-btn" data-preset="sunset-burst">Sunset Burst</button>
+                            <button class="preset-btn" data-preset="celestial-beam">Celestial Beam</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="export-section hidden" id="exportSection">
+                <div class="export-header">
+                    <h2>Export Options</h2>
+                </div>
+                <div class="export-options">
+                    <div class="option-group">
+                        <label for="exportFormat">Format</label>
+                        <select id="exportFormat">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WEBP</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label for="exportQuality">Quality</label>
+                        <div class="slider-container">
+                            <input type="range" id="exportQuality" min="1" max="10" value="8">
+                            <span class="value-display">8</span>
+                        </div>
+                    </div>
+                    <div class="option-group">
+                        <label for="exportSize">Size</label>
+                        <select id="exportSize">
+                            <option value="original">Original</option>
+                            <option value="1080p">1080p</option>
+                            <option value="720p">720p</option>
+                            <option value="480p">480p</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="export-actions">
+                    <button id="downloadBtn" class="download-btn">Download Image</button>
+                    <div class="share-buttons">
+                        <button class="share-btn" data-platform="facebook"><i class="fab fa-facebook-f"></i></button>
+                        <button class="share-btn" data-platform="twitter"><i class="fab fa-twitter"></i></button>
+                        <button class="share-btn" data-platform="pinterest"><i class="fab fa-pinterest-p"></i></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="tutorial-overlay hidden" id="tutorialOverlay">
+        <div class="tutorial-content">
+            <button class="close-tutorial" id="closeTutorial"><i class="fas fa-times"></i></button>
+            <h2>How to Use God Rays Generator</h2>
+            <div class="tutorial-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Upload an Image</h3>
+                        <p>Drag and drop an image or click to select one from your device.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Adjust Light Ray Settings</h3>
+                        <p>Use the sliders to customize position, intensity, ray count, spread angle, and color.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Try Presets</h3>
+                        <p>Click on preset buttons for quick, beautiful effects.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Export Your Creation</h3>
+                        <p>Choose format, quality, and size, then download or share your image.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="start-btn" id="startTutorial">Got it!</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 God Rays Generator. All rights reserved.</p>
+            <button id="tutorialBtn" class="tutorial-btn">How to Use</button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
